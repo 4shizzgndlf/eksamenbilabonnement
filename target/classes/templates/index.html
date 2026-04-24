@@ -6,5 +6,34 @@
 </head>
 <body>
 <h1>Hello World!</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Role</th>
+        <th>Created at</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.role}"></td>
+        <td th:text="${user.created_at}"></td>
+
+        <!-- DELETE BUTTON (only visible to admin) -->
+        <td th:if="${session.user != null and session.user.email == 'admin@admin.com'}">
+            <a th:href="@{/deleteUser(id=${user.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
