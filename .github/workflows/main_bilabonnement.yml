@@ -25,6 +25,10 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://${{secrets.PROD_DATABASE_URL}}/bilabonnementdb
+          SPRING_DATASOURCE_USERNAME: ${{secrets.PROD_DATABASE_USERNAME}}
+          SPRING_DATASOURCE_PASSWORD: ${{secrets.PROD_DATABASE_PASSWORD}}
         run: mvn clean install
 
       - name: Upload artifact for deployment job
