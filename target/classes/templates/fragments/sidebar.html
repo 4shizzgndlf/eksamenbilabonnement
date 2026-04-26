@@ -1,7 +1,7 @@
 <!-- SIDEBAR -->
 <div class="sidebar" th:fragment="sidebar">
     <div class="topSidebar">
-        <a class="item active" th:href="@{/}">
+        <a id="hjem" class="item" th:href="@{/}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Baseline-home
                     SVG
@@ -11,7 +11,7 @@
             </div>
             <div class="label">Hjem</div>
         </a>
-        <a class="item" th:href="@{/lejeaftaler}">
+        <a id="lejeaftaler" class="item" th:href="@{/lejeaftaler}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Contract SVG
                     Icon</title>
@@ -21,7 +21,7 @@
             </div>
             <div class="label">Lejeaftaler</div>
         </a>
-        <a class="item" th:href="@{/skader}">
+        <a id="skader" class="item" th:href="@{/skader}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
                     Currency-krone-danish SVG Icon</title>
@@ -32,7 +32,7 @@
             </div>
             <div class="label">Skader</div>
         </a>
-        <a class="item" th:href="@{/biler}">
+        <a id="biler" class="item" th:href="@{/biler}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15 15"><title>Car-rental SVG
                     Icon</title>
@@ -44,7 +44,7 @@
         </a>
     </div>
     <div class="bottomSidebar">
-        <a th:if="${session.user != null}" class="item" th:href="@{/profil}">
+        <a th:if="${session.user != null}" id="profil" class="item" th:href="@{/profil}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Account SVG
                     Icon</title>
@@ -54,7 +54,7 @@
             </div>
             <div class="label">Profil</div>
         </a>
-        <a th:if="${session.user != null and session.user.email == 'admin@admin.com'}" class="item" th:href="@{/dashboard}">
+        <a th:if="${session.user != null and session.user.role == 'Admin'}" id="dashboard" class="item" th:href="@{/dashboard}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
                     Baseline-dashboard SVG Icon</title>
@@ -63,7 +63,7 @@
             </div>
             <div class="label">Dashboard</div>
         </a>
-        <div th:if="${session.user == null}" class="item" onclick="window.location.href='/register'">
+        <div th:if="${session.user == null}" class="item" onclick="window.location.href='/registrer'">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
                     Accessibility-new-rounded SVG Icon</title>

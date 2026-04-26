@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Biler</title>
+    <title>Log in</title>
     <link rel="stylesheet" th:href="@{css/style.css}">
     <script th:src="@{js/script.js}" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +14,25 @@
 <div th:replace="fragments/sidebar :: sidebar"></div>
 <div class="page">
     <div class="pageContainer">
-        <h1>Biler</h1>
-        <h2>Tilgængelige biler</h2>
-        <h2>Udlejede biler</h2>
-        <h2>Solgte biler</h2>
-        <h2>Ny bil</h2>
+        <div class="auth-wrapper">
+            <div class="auth-card">
+
+                <form method="post" action="/login">
+                    <h2>Log ind</h2>
+
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Adgangskode" required>
+
+                    <button type="submit">Log ind</button>
+                </form>
+
+                <div class="auth-footer">
+                    Har du ikke en konto?
+                    <a href="/registrer">Registrer</a>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 </body>

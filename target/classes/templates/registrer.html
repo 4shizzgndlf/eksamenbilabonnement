@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrer</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <script th:src="@{js/script.js}" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sekuya&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/sidebar :: sidebar"></div>
+<div class="page">
+    <div class="pageContainer">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+
+                <form method="post" action="/register">
+                    <h2>Registrer</h2>
+
+                    <input type="text" name="firstName" placeholder="Fornavn" required>
+                    <input type="text" name="lastName" placeholder="Efternavn" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Adgangskode" required>
+
+                    <select name="role" required>
+                        <option value="">Vælg rolle</option>
+                        <option value="Data">Data</option>
+                        <option value="Skader">Skader</option>
+                        <option value="Forretning">Forretning</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+
+                    <button type="submit">Opret bruger</button>
+                </form>
+
+                <div class="auth-footer">
+                    Har du allerede en konto?
+                    <a href="/login">Log ind</a>
+                </div>
+
+            </div>
+    </div>
+</div>
+</body>
+</html>

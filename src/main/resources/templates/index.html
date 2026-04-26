@@ -14,8 +14,38 @@
 <div th:replace="fragments/sidebar :: sidebar"></div>
 <div class="page">
     <div class="pageContainer">
-        <h1>Hello World!</h1>
+        <div class="home-wrapper">
+
+            <div class="home-card">
+
+                <h1>Velkommen 👋</h1>
+
+                <p th:if="${session.user != null}">
+                    Du er logget ind som <strong th:text="${session.user.firstName}"></strong>
+                </p>
+
+                <p th:if="${session.user == null}">
+                    Log ind eller opret en konto for at komme i gang med bilabonnement.
+                </p>
+
+                <div class="home-actions">
+
+                    <!-- NOT LOGGED IN -->
+                    <a th:if="${session.user == null}" href="/login">Log ind</a>
+                    <a th:if="${session.user == null}" href="/register">Registrer</a>
+
+                    <!-- LOGGED IN -->
+                    <a th:if="${session.user != null}" href="/profil">Min profil</a>
+                    <a th:if="${session.user != null}" href="/biler">Se biler</a>
+                    <a th:if="${session.user != null}" href="/lejeaftaler">Lejeaftaler</a>
+
+                    <!-- ADMIN ONLY -->
+                    <a th:if="${session.user != null and session.user.role == 'Admin'}"
+                       href="/dashboard">Dashboard</a>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

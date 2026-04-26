@@ -7,16 +7,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
-    private final IndexService IndexService;
+    private final IndexService indexService;
 
     public IndexController(IndexService indexService) {
-        IndexService = indexService;
+        this.indexService = indexService;
     }
 
     @GetMapping("/")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("index");
-        mav.addObject("users", IndexService.getAllUsers());
         return mav;
     }
 }

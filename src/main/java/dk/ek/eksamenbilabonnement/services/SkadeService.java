@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IndexService {
+public class SkadeService {
     private final UserRepository userRepo;
 
-    public IndexService(UserRepository userRepo) {
+    public SkadeService(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 }

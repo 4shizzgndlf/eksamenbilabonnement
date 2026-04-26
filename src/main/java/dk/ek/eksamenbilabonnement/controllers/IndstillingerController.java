@@ -1,16 +1,17 @@
 package dk.ek.eksamenbilabonnement.controllers;
 
 import dk.ek.eksamenbilabonnement.services.IndexService;
+import dk.ek.eksamenbilabonnement.services.IndstillingerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndstillingerController {
-    private final IndexService IndexService;
+    private final IndstillingerService indstillingerService;
 
-    public IndstillingerController(IndexService indexService) {
-        IndexService = indexService;
+    public IndstillingerController(IndstillingerService indstillingerService) {
+        this.indstillingerService = indstillingerService;
     }
 
     @GetMapping("/indstillinger")
