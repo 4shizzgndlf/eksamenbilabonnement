@@ -1,0 +1,118 @@
+<!-- SIDEBAR -->
+<div class="sidebar" th:fragment="sidebar">
+    <div class="topSidebar">
+        <a class="item active" th:href="@{/}">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Baseline-home
+                    SVG
+                    Icon</title>
+                    <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/>
+                </svg>
+            </div>
+            <div class="label">Hjem</div>
+        </a>
+        <a class="item" th:href="@{/lejeaftaler}">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Contract SVG
+                    Icon</title>
+                    <path fill="currentColor"
+                          d="M6 22q-1.25 0-2.125-.875T3 19v-3h3V2h15v17q0 1.25-.875 2.125T18 22zm12-2q.425 0 .713-.288T19 19V4H8v12h9v3q0 .425.288.713T18 20M9 9V7h9v2zm0 3v-2h9v2z"/>
+                </svg>
+            </div>
+            <div class="label">Lejeaftaler</div>
+        </a>
+        <a class="item" th:href="@{/skader}">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
+                    Currency-krone-danish SVG Icon</title>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 6v12m0-6c3.5 0 6-3 6-6m-6 6c3.5 0 6 3 6 6m4-8v8m4-8a4 4 0 0 0-4 4m5 4.01V18"/>
+                </svg>
+            </div>
+            <div class="label">Skader</div>
+        </a>
+        <a class="item" th:href="@{/biler}">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15 15"><title>Car-rental SVG
+                    Icon</title>
+                    <path fill="currentColor"
+                          d="M10.5 1a1 1 0 0 0-1 1H2v1l1 1l1-1l1 1l1-1l1 1h2.5a1 1 0 0 0 1 1h2a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm.5 1.5a.5.5 0 0 1 1 0v1a.5.5 0 0 1-1 0zM2.146 9.354A.5.5 0 0 0 2 9.707V13.5a.5.5 0 0 0 .5.5H4a.5.5 0 0 0 .5-.5V13h6v.5a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 0 .5-.5V9.707a.5.5 0 0 0-.146-.353L12 8.5l-1.354-2.257a.5.5 0 0 0-.43-.243H4.784a.5.5 0 0 0-.429.243L3 8.5zM11.134 9H3.866l1.2-2h4.868zM5.5 10.828v.372a.3.3 0 0 1-.3.3H3.3a.3.3 0 0 1-.3-.3v-.834a.3.3 0 0 1 .359-.294l1.82.364a.4.4 0 0 1 .321.392m6.5-.34v.712a.3.3 0 0 1-.3.3H9.8a.3.3 0 0 1-.3-.3v-.454a.3.3 0 0 1 .241-.294l1.78-.356a.4.4 0 0 1 .479.392"/>
+                </svg>
+            </div>
+            <div class="label">Biler</div>
+        </a>
+    </div>
+    <div class="bottomSidebar">
+        <a th:if="${session.user != null}" class="item" th:href="@{/profil}">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Account SVG
+                    Icon</title>
+                    <path fill="currentColor"
+                          d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/>
+                </svg>
+            </div>
+            <div class="label">Profil</div>
+        </a>
+        <a th:if="${session.user != null and session.user.email == 'admin@admin.com'}" class="item" th:href="@{/dashboard}">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
+                    Baseline-dashboard SVG Icon</title>
+                    <path fill="currentColor" d="M3 13h8V3H3zm0 8h8v-6H3zm10 0h8V11h-8zm0-18v6h8V3z"/>
+                </svg>
+            </div>
+            <div class="label">Dashboard</div>
+        </a>
+        <div th:if="${session.user == null}" class="item" onclick="window.location.href='/register'">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
+                    Accessibility-new-rounded SVG Icon</title>
+                    <path fill="currentColor"
+                          d="M10.588 5.413Q10 4.825 10 4t.588-1.412T12 2t1.413.588T14 4t-.587 1.413T12 6t-1.412-.587M9 21V9q-1.225-.1-2.475-.275t-2.45-.45q-.425-.1-.687-.475T3.25 7t.525-.625t.85-.1q1.75.375 3.638.55T12 7t3.738-.175t3.637-.55q.45-.1.85.1T20.75 7t-.137.8t-.688.475q-1.2.275-2.45.45T15 9v12q0 .425-.287.713T14 22t-.712-.288T13 21v-5h-2v5q0 .425-.288.713T10 22t-.712-.288T9 21"/>
+                </svg>
+            </div>
+            <div class="label">Registrer</div>
+        </div>
+        <!-- Show when user is NOT logged in -->
+        <div id="itemLogInBtn" class="itemBtn"
+             th:if="${session.user == null}"
+             onclick="window.location.href='/login'">
+            <div class="iconLogin">
+                <!-- svg -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Bxs-log-in SVG
+                    Icon</title>
+                    <path d="M18.5 2h-13a.5.5 0 0 0-.5.5V11h6V8l5 4l-5 4v-3H5v8.5a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-19a.5.5 0 0 0-.5-.5z"
+                          fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="label">Log in</div>
+        </div>
+
+        <!-- Show when user IS logged in -->
+        <div id="itemLogOutBtn" class="itemBtn"
+             th:if="${session.user != null}"
+             onclick="window.location.href='/logout'">
+            <div class="iconLogin">
+                <!-- you can reuse or change icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Bxs-log-out
+                    SVG Icon</title>
+                    <path d="M18 2H6a1 1 0 0 0-1 1v9l5-4v3h6v2h-6v3l-5-4v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"
+                          fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="label">Log out</div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <a id="itemSettingsBtn" class="itemBtn" th:href="@{/indstillinger}">
+            <div class="iconSettings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
+                    Baseline-settings
+                    SVG Icon</title>
+                    <path fill="currentColor"
+                          d="M19.14 12.94c.04-.3.06-.61.06-.94c0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6s3.6 1.62 3.6 3.6s-1.62 3.6-3.6 3.6"/>
+                </svg>
+            </div>
+            <div class="label">Indstillinger</div>
+        </a>
+    </div>
+</div>

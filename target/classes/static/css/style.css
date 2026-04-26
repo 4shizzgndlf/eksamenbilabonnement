@@ -1,0 +1,192 @@
+/* ===== GLOBAL ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 100vh;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    transition: width 0.3s ease;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    color: white;
+    box-sizing: border-box;
+}
+
+.sidebar-divider {
+    height: 1px;
+    margin: 10px 16px;
+
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+    );
+
+    position: relative;
+}
+
+/* subtle glow */
+.sidebar-divider::after {
+    content: "";
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 0;
+
+    height: 1px;
+    background: rgba(34, 197, 94, 0.4);
+
+    filter: blur(2px);
+}
+
+.topSidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bottomSidebar {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    gap: 10px;
+}
+
+/* Expand on hover */
+.sidebar:hover {
+    width: 220px;
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.12);
+}
+
+/* ===== MENU ITEMS ===== */
+.item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 12px;
+    margin: 0 8px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: white;
+}
+
+#itemLogInBtn {
+    background-color: deepskyblue;
+}
+
+#itemLogOutBtn {
+    background-color: deepskyblue;
+}
+
+#itemSettingsBtn {
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+
+.itemBtn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 12px;
+    margin: 0 8px;
+    transition: all 0.25s ease;
+}
+
+/* Icons */
+.icon {
+    display: flex;
+    font-size: 20px;
+    min-width: 24px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.iconLogin {
+    display: flex;
+    font-size: 20px;
+    min-width: 24px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.iconSettings {
+    display: flex;
+    font-size: 20px;
+    min-width: 24px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* Labels (hidden initially) */
+.label {
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+/* Show labels on hover */
+.sidebar:hover .label {
+    opacity: 1;
+}
+
+/* ===== INTERACTIONS ===== */ /* Hover (white glow) */
+.item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+.itemBtn:hover {
+    opacity: 0.8;
+}
+
+/* Active (white highlight) */
+.item.active {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
+}
+
+.sidebar:hover ~ .content {
+    margin-left: 220px;
+}
+.page {
+    margin-left: 70px; /* same as collapsed sidebar width */
+    padding: 40px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover ~ .page {
+    margin-left: 220px; /* same as expanded sidebar width */
+}
