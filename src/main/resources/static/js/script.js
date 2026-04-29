@@ -34,3 +34,20 @@ if (currentPath === "/login") {
 if (currentPath === "/indstillinger") {
     document.querySelector("#indstillinger")?.classList.add("active");
 }
+
+function fillEditFormFromButton(btn) {
+
+    document.getElementById("edit-id").value = btn.dataset.id;
+    document.getElementById("edit-customerName").value = btn.dataset.name;
+    document.getElementById("edit-carId").value = btn.dataset.car;
+    document.getElementById("edit-userId").value = btn.dataset.user || "";
+    document.getElementById("edit-startDate").value = btn.dataset.start;
+    document.getElementById("edit-endDate").value = btn.dataset.end || "";
+    document.getElementById("edit-monthlyPrice").value = btn.dataset.price;
+    document.getElementById("edit-status").value = btn.dataset.status;
+
+    // scroll to form
+    document.querySelector("#edit-id").scrollIntoView({
+        behavior: "smooth"
+    });
+}
