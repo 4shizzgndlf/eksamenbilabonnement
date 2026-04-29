@@ -190,6 +190,10 @@ body {
     margin-left: 220px; /* same as expanded sidebar width */
 }
 
+.pageContainer {
+    margin: 0 40px;
+}
+
 /* ===== AUTH PAGES ===== */
 
 .auth-wrapper {
@@ -329,4 +333,120 @@ body {
     box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
 }
 
+/* ===== PAGE TITLE ===== */
+.page-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* ===== GLASS CARD ===== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* ===== TABLE ===== */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.styled-table th {
+    text-align: left;
+    padding: 12px;
+    color: rgba(0,0,0,0.7);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.styled-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.styled-table tr:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+/* ===== STATUS BADGE ===== */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge.active {
+    background: rgba(34,197,94,0.2);
+    color: #22c55e;
+}
+
+.status-badge.done {
+    background: rgba(168,85,247,0.2);
+    color: #a855f7;
+}
+
+/* ===== FORM ===== */
+.card-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card-form input,
+.card-form select {
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: black;
+    outline: none;
+}
+
+.card-form input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* full width button */
+.card-form button {
+    grid-column: span 2;
+}
+
+/* ===== BUTTON ===== */
+.primary-btn {
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34,197,94,0.4);
+}
+
+.edit-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.edit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
 
