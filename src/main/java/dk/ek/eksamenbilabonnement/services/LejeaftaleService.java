@@ -25,9 +25,22 @@ public class LejeaftaleService {
 
     public void createBooking(Booking booking) {
         bookingRepo.createBooking(booking);
+
+        // When booking is created → car becomes rented
+        bookingRepo.updateCarStatus(booking.getCarId(), "UDLEJET");
     }
 
     public void updateBooking(Booking booking) {
         bookingRepo.updateBooking(booking);
+
+        // If booking is finished → car becomes available again
+        if ("FÆRDIG".equals(booking.getStatus())) {
+            bookingRepo.updateCarStatus(booking.getCarId(), "TILGÆNGELIG");
+        }
+
+        // Optional: if set back to AKTIV → mark as rented again
+        if ("AKTIV".equals(booking.getStatus())) {
+            bookingRepo.updateCarStatus(booking.getCarId(), "UDLEJET");
+        }
     }
 }
