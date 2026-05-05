@@ -82,4 +82,24 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateUser(User user) {
+        String sql = "UPDATE users SET email=?, password=?, firstName=?, lastName=?, role=? WHERE id=?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getFirstName());
+            ps.setString(4, user.getLastName());
+            ps.setString(5, user.getRole());
+            ps.setInt(6, user.getId());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

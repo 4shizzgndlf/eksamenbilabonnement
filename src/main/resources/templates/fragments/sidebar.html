@@ -54,7 +54,7 @@
             </div>
             <div class="label">Profil</div>
         </a>
-        <a th:if="${session.user != null and session.user.role == 'Admin'}" id="dashboard" class="item" th:href="@{/dashboard}">
+        <a th:if="${session.user != null}" id="dashboard" class="item" th:href="@{/dashboard}">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>
                     Baseline-dashboard SVG Icon</title>

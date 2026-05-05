@@ -15,6 +15,40 @@
 <div class="page">
     <div class="pageContainer">
         <h1>Profil</h1>
+        <div class="profil-wrapper">
+            <div class="glass-card">
+                <h2>Profil</h2>
+
+                <form action="/profil/opdater" method="post" class="card-form">
+
+                    <input type="hidden" name="id" th:value="${user.id}"/>
+
+                    <input type="text" name="firstName"
+                           placeholder="Fornavn"
+                           th:value="${user.firstName}" required/>
+
+                    <input type="text" name="lastName"
+                           placeholder="Efternavn"
+                           th:value="${user.lastName}" required/>
+
+                    <input type="email" name="email"
+                           placeholder="Email"
+                           th:value="${user.email}" required/>
+
+                    <input type="password" name="password"
+                           placeholder="Ny adgangskode"/>
+
+                    <!-- Optional: role (readonly if needed) -->
+                    <input type="text" name="role"
+                           th:value="${user.role}" readonly/>
+
+                    <button type="submit" class="primary-btn">
+                        Opdater profil
+                    </button>
+
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>
