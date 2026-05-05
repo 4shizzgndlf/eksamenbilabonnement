@@ -32,12 +32,14 @@
 
                     <!-- NOT LOGGED IN -->
                     <a th:if="${session.user == null}" href="/login">Log ind</a>
-                    <a th:if="${session.user == null}" href="/register">Registrer</a>
+                    <a th:if="${session.user == null}" href="/registrer">Registrer</a>
 
                     <!-- LOGGED IN -->
                     <a th:if="${session.user != null}" href="/profil">Min profil</a>
                     <a th:if="${session.user != null}" href="/biler">Se biler</a>
                     <a th:if="${session.user != null}" href="/lejeaftaler">Lejeaftaler</a>
+                    <a th:if="${session.user != null}" href="/skader">Opret skade</a>
+                    <a th:if="${session.user != null}" href="/indstillinger">Indstillinger</a>
 
                     <!-- ADMIN ONLY -->
                     <a th:if="${session.user != null and session.user.role == 'Admin'}"

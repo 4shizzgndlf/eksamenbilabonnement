@@ -13,10 +13,8 @@ public class BookingRepository {
 
     @Value("${spring.datasource.url}")
     private String dbUrl;
-
     @Value("${spring.datasource.username}")
     private String username;
-
     @Value("${spring.datasource.password}")
     private String password;
 
@@ -108,6 +106,22 @@ public class BookingRepository {
         }
     }
 
+    public void updateCarStatus(int carId, String status) {
+        String sql = "UPDATE cars SET status = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setInt(2, carId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void updateBooking(Booking booking) {
         String sql = "UPDATE bookings SET car_id=?, user_id=?, customer_name=?, start_date=?, end_date=?, monthly_price=?, status=? WHERE id=?";
 
@@ -135,5 +149,26 @@ public class BookingRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int findCarIdByBookingId(int bookingId) {
+        String sql = "SELECT car_id FROM bookings WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, bookingId);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("car_id");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        throw new RuntimeException("Booking not found");
     }
 }

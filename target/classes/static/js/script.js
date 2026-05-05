@@ -51,3 +51,14 @@ function fillEditFormFromButton(btn) {
         behavior: "smooth"
     });
 }
+
+function fillCarForm(button) {
+    document.getElementById("edit-car-id").value = button.dataset.id;
+    document.getElementById("edit-brand").value = button.dataset.brand;
+    document.getElementById("edit-model").value = button.dataset.model;
+    document.getElementById("edit-vin").value = button.dataset.vin;
+    document.getElementById("edit-vehicleNumber").value = button.dataset.number;
+    document.getElementById("edit-subscriptionPrice").value = button.dataset.sub;
+    document.getElementById("edit-purchasePrice").value = button.dataset.purchase;
+    document.getElementById("edit-status").value = button.dataset.status;
+}

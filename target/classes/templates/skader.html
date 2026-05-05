@@ -14,10 +14,112 @@
 <div th:replace="fragments/sidebar :: sidebar"></div>
 <div class="page">
     <div class="pageContainer">
-        <h1>Skader</h1>
-        <h2>Skadede biler</h2>
-        <h2>Aktuelle skader</h2>
-        <h2>Ny skade</h2>
+
+        <h1 class="page-title">Skader</h1>
+
+        <!-- SKADEDE BILER -->
+        <div class="glass-card">
+            <h2>Skadede biler</h2>
+
+            <div class="car-grid">
+
+                <div class="car-card" th:each="car : ${damagedCars}">
+
+                    <!-- IMAGE -->
+                    <img th:src="${car.imageUrl}" alt="Bil billede" class="car-image"/>
+
+                    <!-- INFO -->
+                    <div class="car-info">
+                        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+
+                        <p><strong>Stelnummer:</strong> <span th:text="${car.vin}"></span></p>
+                        <p><strong>Nummer:</strong> <span th:text="${car.vehicleNumber}"></span></p>
+
+                        <p class="price" th:text="${car.subscriptionPrice} + ' kr/md'"></p>
+
+                        <span class="status-badge danger"
+                              th:text="${car.status}">
+                </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+            <p th:if="${#lists.isEmpty(damagedCars)}">
+                Ingen biler er markeret som skadet 🚗
+            </p>
+
+        </div>
+
+        <div class="glass-card">
+            <h2>Aktuelle skader</h2>
+
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Booking ID</th>
+                    <th>Beskrivelse</th>
+                    <th>Pris</th>
+                    <th>Godkendt</th>
+                    <th>Dato</th>
+                    <th>Slet</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="damage : ${damages}">
+                    <td th:text="${damage.id}"></td>
+                    <td th:text="${damage.bookingId}"></td>
+                    <td th:text="${damage.description}"></td>
+                    <td th:text="${damage.price} + ' kr'"></td>
+
+                    <td>
+                <span class="status-badge"
+                      th:text="${damage.approved} ? 'Godkendt' : 'Afventer'"
+                      th:classappend="${damage.approved} ? ' active' : ' danger'">
+                </span>
+                    </td>
+
+                    <td th:text="${damage.reportedAt}"></td>
+                    <td>
+                        <form method="post" action="/skader/slet" onsubmit="return confirm('Er du sikker?')">
+                            <input type="hidden" name="damageId" th:value="${damage.id}">
+                            <input type="hidden" name="bookingId" th:value="${damage.bookingId}">
+
+                            <button type="submit" class="delete-btn">
+                                Slet
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- EMPTY STATE -->
+            <p th:if="${#lists.isEmpty(damages)}">
+                Ingen skader registreret
+            </p>
+        </div>
+
+        <div class="glass-card">
+            <h2>Ny skade</h2>
+
+            <form method="post" action="/skader/opret" class="card-form">
+
+                <input type="number" name="bookingId" placeholder="Booking ID" required>
+
+                <textarea name="description" placeholder="Beskrivelse af skade" required></textarea>
+
+                <input type="number" step="0.01" name="price" placeholder="Pris" required>
+
+                <button type="submit" class="primary-btn">Opret skade</button>
+
+            </form>
+        </div>
+
     </div>
 </div>
 </body>

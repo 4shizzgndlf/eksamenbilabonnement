@@ -3,6 +3,7 @@ package dk.ek.eksamenbilabonnement.controllers;
 import dk.ek.eksamenbilabonnement.models.Booking;
 import dk.ek.eksamenbilabonnement.services.IndexService;
 import dk.ek.eksamenbilabonnement.services.LejeaftaleService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,11 @@ public class LejeaftalerController {
     }
 
     @GetMapping("/lejeaftaler")
-    public ModelAndView lejeaftaler() {
+    public ModelAndView lejeaftaler(HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return new ModelAndView("redirect:/login");
+        }
+
         ModelAndView mav = new ModelAndView("lejeaftaler");
 
         mav.addObject("activeBookings", lejeaftaleService.getActiveBookings());
