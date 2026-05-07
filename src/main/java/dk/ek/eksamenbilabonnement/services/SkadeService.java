@@ -11,6 +11,7 @@ import dk.ek.eksamenbilabonnement.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SkadeService {
@@ -59,5 +60,21 @@ public class SkadeService {
         if (!hasMoreDamages) {
             carRepository.updateCarStatus(carId, "TILGÆNGELIG");
         }
+    }
+
+    public int getDamageCount() {
+        return damageRepository.countDamages();
+    }
+
+    public Map<String, Integer> getDamagesPerCar() {
+        return damageRepository.countDamagesPerCar();
+    }
+
+    public double getAverageDamagePrice() {
+        return damageRepository.getAverageDamagePrice();
+    }
+
+    public Map<String, Double> getTotalDamagePricePerCar() {
+        return damageRepository.getTotalDamagePricePerCar();
     }
 }

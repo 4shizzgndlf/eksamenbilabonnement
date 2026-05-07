@@ -2,6 +2,7 @@ package dk.ek.eksamenbilabonnement.repositories;
 
 import dk.ek.eksamenbilabonnement.models.Booking;
 import java.util.List;
+import java.util.Map;
 
 public interface BookingRepository {
 
@@ -16,4 +17,12 @@ public interface BookingRepository {
     void updateCarStatus(int carId, String status);
 
     int findCarIdByBookingId(int bookingId);
+
+    int countAllBookings();
+
+    List<Integer> findRentedCarIds();
+
+    Map<String, Integer> countBookingsPerUser();
+
+    double getAverageRentalDays();
 }

@@ -563,3 +563,98 @@ body {
     min-height: 100vh;
     width: 100%;
 }
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.keyNumbers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+/* Each stat block becomes a card */
+.keyNumbers > div {
+    background: rgba(0, 0, 0, 0.35); /* darker background */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 16px 18px;
+}
+
+/* Hover effect */
+.keyNumbers > div:hover {
+    transform: translateY(-3px);
+    border-color: rgba(168, 85, 247, 0.35);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Title styling */
+.keyNumbers strong {
+    display: block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.keyNumbers > div:nth-child(1) {
+    border-left: 4px solid #22c55e;
+}
+
+.keyNumbers > div:nth-child(2) {
+    border-left: 4px solid deepskyblue;
+}
+
+.keyNumbers > div:nth-child(3) {
+    border-left: 4px solid #a855f7;
+}
+
+.keyNumbers > div:nth-child(4) {
+    border-left: 4px solid #f59e0b;
+}
+
+.keyNumbers > div:nth-child(5) {
+    border-left: 4px solid #ef4444;
+}
+
+.keyNumbers > div:nth-child(6) {
+    border-left: 4px solid #14b8a6;
+}
+
+.keyNumbers > div:nth-child(7) {
+    border-left: 4px solid #6366f1;;
+}
+
+.keyNumbers > div:nth-child(8) {
+    border-left: 4px solid #f5fd08; /* yellow */
+}
+
+.keyNumbers > div:nth-child(9) {
+    border-left: 4px solid #ec4899; /* pink */
+}
+
+.keyNumbers > div:nth-child(10) {
+    border-left: 4px solid grey;
+}
+
+.keyNumbers > div:nth-child(11) {
+    border-left: 4px solid #000000;
+}
+
+.keyNumbers > div:hover div {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.keyNumbers > div > div {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.keyNumbers,
+.keyNumbers * {
+    color: #ffffff !important;
+}

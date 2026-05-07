@@ -15,35 +15,196 @@
 <div class="page">
     <div class="pageContainer">
         <h1>Dashboard</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Role</th>
-                <th>Created at</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.password}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.role}"></td>
-                <td th:text="${user.created_at}"></td>
+        <div class="glass-card">
+            <h2>Brugere</h2>
+            <div class="userDetails">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Created at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td th:text="${user.firstName}"></td>
+                        <td th:text="${user.lastName}"></td>
+                        <td th:text="${user.role}"></td>
+                        <td th:text="${user.created_at}"></td>
 
-                <!-- DELETE BUTTON (only visible to admin) -->
-                <td th:if="${session.user != null and session.user.email == 'admin@admin.com'}">
-                    <a th:href="@{/deleteUser(id=${user.id})}">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                        <!-- DELETE BUTTON (only visible to admin) -->
+                        <td th:if="${session.user != null and session.user.email == 'admin@admin.com'}">
+                            <a th:href="@{/deleteUser(id=${user.id})}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="glass-card">
+            <h2>Nøgletal</h2>
+            <h3>Brugere</h3>
+            <div class="keyNumbers">
+                <div>
+                    <strong>Antal brugere</strong>
+                    <div th:text="${userCount}"></div>
+                </div>
+                <div>
+                    <strong>Antal brugere med samme rolle</strong>
+                    <div>
+                        <div th:each="role : ${rolesCount}">
+                            <span th:text="${role.key}"></span>
+                            :
+                            <span th:text="${role.value}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <strong>Duplikat konti</strong>
+
+                    <div th:each="name : ${duplicateNames}">
+                        <span th:text="${name.key}"></span>
+                        :
+                        <span th:text="${name.value}"></span>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h3>Lejeaftaler</h3>
+            <div class="keyNumbers">
+                <div>
+                    <strong>Antal lejeaftaler</strong>
+                    <div th:text="${bookingsCount}"></div>
+                </div>
+                <div>
+                    <strong>Antal aktive lejeaftaler</strong>
+                    <div th:text="${activeBookingsCount}"></div>
+                </div>
+                <div>
+                    <strong>Antal færdige lejeaftaler</strong>
+                    <div th:text="${finishedBookingsCount}"></div>
+                </div>
+                <div>
+                    <strong>Biler der er lejet ud</strong>
+                    <div>
+                    <span th:each="carId : ${rentedCars}">
+                        <span th:text="${carId}"></span><span>, </span>
+                    </span>
+                    </div>
+                </div>
+                <div>
+                    <strong>Lejeaftaler pr. bruger</strong>
+
+                    <div th:each="entry : ${bookingsPerUser}">
+                        <span th:text="${entry.key}"></span>
+                        :
+                        <span th:text="${entry.value}"></span>
+                    </div>
+                </div>
+                <div>
+                    <strong>Gennemsnitlig lejeperiode (dage)</strong>
+                    <div th:text="${avgRentalDays}"></div>
+                </div>
+                <div>
+                    <strong>Gennemsnitlig månedlig pris</strong>
+                    <div th:text="${averageMonthlyPrice} + ' kr'"></div>
+                </div>
+            </div>
+            <h3>Skader</h3>
+            <div class="keyNumbers">
+                <div>
+                    <strong>Antal skader</strong>
+                    <div th:text="${damageCount}"></div>
+                </div>
+                <div>
+                    <strong>Antal skader pr. bil</strong>
+
+                    <div th:each="entry : ${damagesPerCar}">
+                        <span th:text="${entry.key}"></span>
+                        :
+                        <span th:text="${entry.value}"></span>
+                    </div>
+                </div>
+                <div>
+                    <strong>Gennemsnitlig skade pris</strong>
+                    <div th:text="${averageDamagePrice} + ' kr'"></div>
+                </div>
+                <div>
+                    <strong>Samlet skade pris pr. bil</strong>
+
+                    <div th:each="entry : ${damagePricePerCar}">
+                        <span th:text="${entry.key}"></span>
+                        :
+                        <span th:text="${entry.value} + ' kr'"></span>
+                    </div>
+                </div>
+            </div>
+            <h3>Biler</h3>
+            <div class="keyNumbers">
+                <div>
+                    <strong>Antal biler</strong>
+                    <div th:text="${carCount}"></div>
+                </div>
+
+                <div>
+                    <strong>Antal tilgængelige biler</strong>
+                    <div th:text="${availableCars}"></div>
+                </div>
+
+                <div>
+                    <strong>Antal udlejede biler</strong>
+                    <div th:text="${rentedCarCount}"></div>
+                </div>
+                <div>
+                    <strong>Antal biler med skade</strong>
+                    <div th:text="${carsWithDamage}"></div>
+                </div>
+                <div>
+                    <strong>Biler til salg</strong>
+                    <div th:each="car : ${carsForSale}">
+                        <div th:text="${car.brand} + ' ' + ${car.model}"></div>
+                    </div>
+                </div>
+                <div>
+                    <strong>Solgte biler</strong>
+                    <div th:each="entry : ${soldCarsStats}">
+                        <span th:text="${entry.key}"></span>
+                        :
+                        <span th:text="${entry.value}"></span>
+                        solgt
+                    </div>
+                </div>
+                <div>
+                    <strong>Antal tilbageleverede biler</strong>
+                    <div th:text="${returnedCarsCount}"></div>
+                </div>
+                <div>
+                    <strong>Gennemsnitlig månedlig pris</strong>
+                    <div th:text="${averageMonthlyPrice} + ' kr'"></div>
+                </div>
+                <div>
+                    <strong>Gennemsnitlig salgspris</strong>
+                    <div th:text="${averagePurchasePrice} + ' kr'"></div>
+                </div>
+                <div>
+                    <strong>Gennemsnitlig månedlig pris på udlejede biler</strong>
+                    <div th:text="${averageRentedMonthlyPrice} + ' kr'"></div>
+                </div>
+                <div>
+                    <strong>Sammenlagt månedlig pris på udlejede biler</strong>
+                    <div th:text="${totalRentedMonthlyPrice} + ' kr'"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

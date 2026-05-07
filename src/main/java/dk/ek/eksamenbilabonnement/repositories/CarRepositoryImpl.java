@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CarRepositoryImpl implements CarRepository {
@@ -154,5 +156,169 @@ public class CarRepositoryImpl implements CarRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int countCars() {
+        String sql = "SELECT COUNT(*) FROM cars";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public int countCarsWithDamage() {
+
+        String sql = """
+                    SELECT COUNT(DISTINCT b.car_id) AS damaged_cars
+                    FROM damages d
+                    JOIN bookings b ON d.booking_id = b.id
+                """;
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getInt("damaged_cars");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public Map<String, Integer> countSoldCarsByBrandAndModel() {
+
+        Map<String, Integer> result = new HashMap<>();
+
+        String sql = """
+                    SELECT brand, model, COUNT(*) AS sold_count
+                    FROM cars
+                    WHERE status = 'SOLGT'
+                    GROUP BY brand, model
+                """;
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+
+                String carName =
+                        rs.getString("brand") + " " +
+                                rs.getString("model");
+
+                int count = rs.getInt("sold_count");
+
+                result.put(carName, count);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    public int countReturnedCars() {
+
+        String sql = "SELECT COUNT(*) FROM cars WHERE status = 'AFLEVERET'";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public double getAverageSubscriptionPrice() {
+        String sql = "SELECT AVG(subscription_price) FROM cars";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public double getAveragePurchasePrice() {
+        String sql = "SELECT AVG(purchase_price) FROM cars";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public double getAverageSubscriptionPriceForRentedCars() {
+        String sql = "SELECT AVG(subscription_price) FROM cars WHERE status = 'UDLEJET'";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public double getTotalSubscriptionPriceForRentedCars() {
+        String sql = "SELECT SUM(subscription_price) FROM cars WHERE status = 'UDLEJET'";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
     }
 }
