@@ -5,6 +5,7 @@ import dk.ek.eksamenbilabonnement.repositories.BookingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class LejeaftaleService {
@@ -15,12 +16,24 @@ public class LejeaftaleService {
         this.bookingRepo = bookingRepo;
     }
 
+    public int getAllBookingsCount() {
+        return bookingRepo.countAllBookings();
+    }
+
     public List<Booking> getActiveBookings() {
         return bookingRepo.findActiveBookings();
     }
 
+    public int getActiveBookingsCount() {
+        return bookingRepo.findActiveBookings().size();
+    }
+
     public List<Booking> getFinishedBookings() {
         return bookingRepo.findFinishedBookings();
+    }
+
+    public int getFinishedBookingsCount() {
+        return bookingRepo.findFinishedBookings().size();
     }
 
     public void createBooking(Booking booking) {
@@ -33,14 +46,51 @@ public class LejeaftaleService {
     public void updateBooking(Booking booking) {
         bookingRepo.updateBooking(booking);
 
-        // If booking is finished → car becomes available again
-        if ("FÆRDIG".equals(booking.getStatus())) {
-            bookingRepo.updateCarStatus(booking.getCarId(), "TILGÆNGELIG");
-        }
+        String status = booking.getStatus().trim().toUpperCase();
 
-        // Optional: if set back to AKTIV → mark as rented again
-        if ("AKTIV".equals(booking.getStatus())) {
+        if ("AKTIV".equals(status)) {
             bookingRepo.updateCarStatus(booking.getCarId(), "UDLEJET");
         }
+
+        if ("FÆRDIG".equals(status)) {
+            bookingRepo.updateCarStatus(booking.getCarId(), "TILGÆNGELIG");
+        }
+    }
+
+    public List<Integer> getRentedCarIds() {
+        return bookingRepo.findRentedCarIds();
+    }
+
+    public Map<String, Integer> getBookingsPerUser() {
+        return bookingRepo.countBookingsPerUser();
+    }
+
+    public double getAverageMonthlyPrice() {
+
+        List<Booking> active = bookingRepo.findActiveBookings();
+        List<Booking> finished = bookingRepo.findFinishedBookings();
+
+        double total = 0;
+        int count = 0;
+
+        for (Booking b : active) {
+            total += b.getMonthlyPrice();
+            count++;
+        }
+
+        for (Booking b : finished) {
+            total += b.getMonthlyPrice();
+            count++;
+        }
+
+        if (count == 0) {
+            return 0;
+        }
+
+        return total / count;
+    }
+
+    public double getAverageRentalDays() {
+        return bookingRepo.getAverageRentalDays();
     }
 }

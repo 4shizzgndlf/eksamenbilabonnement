@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DamageRepositoryImpl implements DamageRepository {
@@ -98,5 +100,108 @@ public class DamageRepositoryImpl implements DamageRepository {
         }
 
         return false;
+    }
+
+    public int countDamages() {
+
+        String sql = "SELECT COUNT(*) FROM damages";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public Map<String, Integer> countDamagesPerCar() {
+
+        Map<String, Integer> result = new HashMap<>();
+
+        String sql = """
+        SELECT c.brand, c.model, COUNT(d.id) AS damage_count
+        FROM damages d
+        JOIN bookings b ON d.booking_id = b.id
+        JOIN cars c ON b.car_id = c.id
+        GROUP BY c.id, c.brand, c.model
+    """;
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                String carName = rs.getString("brand") + " " + rs.getString("model");
+                int count = rs.getInt("damage_count");
+
+                result.put(carName, count);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    public double getAverageDamagePrice() {
+
+        String sql = "SELECT AVG(price) FROM damages";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0.0;
+    }
+
+    public Map<String, Double> getTotalDamagePricePerCar() {
+
+        Map<String, Double> result = new HashMap<>();
+
+        String sql = """
+        SELECT c.brand, c.model, SUM(d.price) AS total_damage_price
+        FROM damages d
+        JOIN bookings b ON d.booking_id = b.id
+        JOIN cars c ON b.car_id = c.id
+        GROUP BY c.id, c.brand, c.model
+    """;
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+
+                String carName = rs.getString("brand") + " " + rs.getString("model");
+                double total = rs.getDouble("total_damage_price");
+
+                result.put(carName, total);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
     }
 }

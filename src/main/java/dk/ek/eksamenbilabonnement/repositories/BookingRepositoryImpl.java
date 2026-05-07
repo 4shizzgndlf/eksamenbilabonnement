@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BookingRepositoryImpl implements BookingRepository {
@@ -170,5 +172,99 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
 
         throw new RuntimeException("Booking not found");
+    }
+
+    public int countAllBookings() {
+
+        String sql = "SELECT COUNT(*) FROM bookings";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public List<Integer> findRentedCarIds() {
+
+        List<Integer> carIds = new ArrayList<>();
+
+        String sql = "SELECT car_id FROM bookings WHERE status = 'AKTIV'";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                carIds.add(rs.getInt("car_id"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return carIds;
+    }
+
+    public Map<String, Integer> countBookingsPerUser() {
+
+        Map<String, Integer> result = new HashMap<>();
+
+        String sql = "SELECT u.email FROM bookings b " +
+                "JOIN users u ON b.user_id = u.id " +
+                "WHERE b.user_id IS NOT NULL";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+
+                String email = rs.getString("email");
+
+                if (result.get(email) == null) {
+                    result.put(email, 1);
+                } else {
+                    result.put(email, result.get(email) + 1);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    public double getAverageRentalDays() {
+
+        String sql = "SELECT AVG(DATEDIFF(end_date, start_date)) AS avg_days " +
+                "FROM bookings WHERE end_date IS NOT NULL";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, username, password)) {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                return rs.getDouble("avg_days");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
     }
 }
