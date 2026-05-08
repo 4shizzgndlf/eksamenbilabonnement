@@ -62,3 +62,43 @@ function fillCarForm(button) {
     document.getElementById("edit-purchasePrice").value = button.dataset.purchase;
     document.getElementById("edit-status").value = button.dataset.status;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const themeInputs = document.querySelectorAll(
+        'input[name="sidebarTheme"]'
+    );
+
+    // Load saved color
+    const savedColor = localStorage.getItem("sidebarColor");
+
+    if (savedColor) {
+        document.documentElement.style.setProperty(
+            "--sidebar-color",
+            savedColor
+        );
+
+        // check correct radio button
+        themeInputs.forEach(input => {
+            if (input.value === savedColor) {
+                input.checked = true;
+            }
+        });
+    }
+
+    // Change color on click
+    themeInputs.forEach(input => {
+        input.addEventListener("change", () => {
+
+            const color = input.value;
+
+            document.documentElement.style.setProperty(
+                "--sidebar-color",
+                color
+            );
+
+            localStorage.setItem("sidebarColor", color);
+        });
+    });
+
+});

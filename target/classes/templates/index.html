@@ -16,34 +16,99 @@
     <div class="pageContainer">
         <div class="home-wrapper">
 
-            <div class="home-card">
+            <div class="homePage">
+                <div class="home-card">
 
-                <h1>Velkommen 👋</h1>
+                    <h1>Velkommen 👋</h1>
 
-                <p th:if="${session.user != null}">
-                    Du er logget ind som <strong th:text="${session.user.firstName}"></strong>
+                    <p th:if="${session.user != null}">
+                        Du er logget ind som <strong th:text="${session.user.firstName}"></strong>
+                    </p>
+
+                    <p th:if="${session.user == null}">
+                        Log ind eller opret en konto for at komme i gang med bilabonnement.
+                    </p>
+
+                    <div class="home-actions">
+
+                        <!-- NOT LOGGED IN -->
+                        <a th:if="${session.user == null}" href="/login">Log ind</a>
+                        <a th:if="${session.user == null}" href="/registrer">Registrer</a>
+
+                        <!-- LOGGED IN -->
+                        <a th:if="${session.user != null}" href="/profil">Min profil</a>
+                        <a th:if="${session.user != null}" href="/biler">Se biler</a>
+                        <a th:if="${session.user != null}" href="/lejeaftaler">Lejeaftaler</a>
+                        <a th:if="${session.user != null}" href="/skader">Opret skade</a>
+                        <a th:if="${session.user != null}" href="/indstillinger">Indstillinger</a>
+
+                        <!-- ADMIN ONLY -->
+                        <a th:if="${session.user != null and session.user.role == 'Admin'}"
+                           href="/dashboard">Dashboard</a>
+
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Scroll ned</span>
+                    <div class="scroll-arrow">↓</div>
+                </div>
+            </div>
+            <div class="how-it-works-section">
+
+                <h2 class="how-title">Sådan fungerer systemet</h2>
+                <p class="how-subtitle">
+                    Følg processen fra oprettelse af bruger til afsluttet lejeaftale.
                 </p>
 
-                <p th:if="${session.user == null}">
-                    Log ind eller opret en konto for at komme i gang med bilabonnement.
-                </p>
+                <div class="how-grid">
 
-                <div class="home-actions">
+                    <div class="how-card">
+                        <div class="step-number">1</div>
+                        <h3>Opret bruger / Log ind</h3>
+                        <p>Start med at oprette en bruger eller log ind i systemet.</p>
+                    </div>
 
-                    <!-- NOT LOGGED IN -->
-                    <a th:if="${session.user == null}" href="/login">Log ind</a>
-                    <a th:if="${session.user == null}" href="/registrer">Registrer</a>
+                    <div class="how-card">
+                        <div class="step-number">2</div>
+                        <h3>Opret kunde</h3>
+                        <p>Registrér kunden før der oprettes en lejeaftale.</p>
+                    </div>
 
-                    <!-- LOGGED IN -->
-                    <a th:if="${session.user != null}" href="/profil">Min profil</a>
-                    <a th:if="${session.user != null}" href="/biler">Se biler</a>
-                    <a th:if="${session.user != null}" href="/lejeaftaler">Lejeaftaler</a>
-                    <a th:if="${session.user != null}" href="/skader">Opret skade</a>
-                    <a th:if="${session.user != null}" href="/indstillinger">Indstillinger</a>
+                    <div class="how-card">
+                        <div class="step-number">3</div>
+                        <h3>Kig efter tilgængelige biler</h3>
+                        <p>Find biler med status som tilgængelig.</p>
+                    </div>
 
-                    <!-- ADMIN ONLY -->
-                    <a th:if="${session.user != null and session.user.role == 'Admin'}"
-                       href="/dashboard">Dashboard</a>
+                    <div class="how-card">
+                        <div class="step-number">4</div>
+                        <h3>Opret lejeaftale</h3>
+                        <p>Opret en ny lejeaftale for kunden og bilen.</p>
+                    </div>
+
+                    <div class="how-card">
+                        <div class="step-number">5</div>
+                        <h3>Tilbagelever bilen</h3>
+                        <p>Ændr bilens status til tilbageleveret når bilen afleveres.</p>
+                    </div>
+
+                    <div class="how-card">
+                        <div class="step-number">6</div>
+                        <h3>Opret skader</h3>
+                        <p>Registrér eventuelle skader på bilen efter aflevering.</p>
+                    </div>
+
+                    <div class="how-card">
+                        <div class="step-number">7</div>
+                        <h3>Slet reparerede skader</h3>
+                        <p>Fjern skader fra systemet når de er repareret.</p>
+                    </div>
+
+                    <div class="how-card">
+                        <div class="step-number">8</div>
+                        <h3>Afslut lejeaftale</h3>
+                        <p>Ændr lejeaftalens status til færdig.</p>
+                    </div>
 
                 </div>
             </div>
