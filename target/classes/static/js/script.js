@@ -10,6 +10,9 @@ items.forEach(item => item.classList.remove("active"));
 if (currentPath === "/") {
     document.querySelector("#hjem")?.classList.add("active");
 }
+if (currentPath === "/kunder") {
+    document.querySelector("#kunder")?.classList.add("active");
+}
 if (currentPath === "/lejeaftaler") {
     document.querySelector("#lejeaftaler")?.classList.add("active");
 }

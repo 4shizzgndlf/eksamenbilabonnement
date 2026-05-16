@@ -26,7 +26,15 @@ public class UserRepositoryImpl implements UserRepository {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("role"), resultSet.getString("created_at"));
+                User u = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("firstName"),
+                        resultSet.getString("lastName"),
+                        resultSet.getString("role"),
+                        resultSet.getString("created_at")
+                );
                 users.add(u);
             }
 

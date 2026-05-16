@@ -37,6 +37,7 @@
 
                         <!-- LOGGED IN -->
                         <a th:if="${session.user != null}" href="/profil">Min profil</a>
+                        <a th:if="${session.user != null}" href="/kunder">Kunder</a>
                         <a th:if="${session.user != null}" href="/biler">Se biler</a>
                         <a th:if="${session.user != null}" href="/lejeaftaler">Lejeaftaler</a>
                         <a th:if="${session.user != null}" href="/skader">Opret skade</a>
