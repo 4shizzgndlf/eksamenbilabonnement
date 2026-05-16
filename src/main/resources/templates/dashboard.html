@@ -42,8 +42,15 @@
 
                         <!-- DELETE BUTTON (only visible to admin) -->
                         <td th:if="${session.user != null and session.user.email == 'admin@admin.com'}">
-                            <a th:href="@{/deleteUser(id=${user.id})}">Delete</a>
+                            <form action="/dashboard/delete-user" method="post">
+                                <input type="hidden" name="id" th:value="${user.id}">
+
+                                <button type="submit" class="delete-btn">
+                                    Slet
+                                </button>
+                            </form>
                         </td>
+
                     </tr>
                     </tbody>
                 </table>

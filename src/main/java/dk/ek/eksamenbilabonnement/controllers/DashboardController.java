@@ -5,6 +5,8 @@ import dk.ek.eksamenbilabonnement.services.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -60,5 +62,18 @@ public class DashboardController {
         mav.addObject("averageRentedMonthlyPrice", bilerService.getAverageRentedCarMonthlyPrice());
         mav.addObject("totalRentedMonthlyPrice", bilerService.getTotalRentedMonthlyPrice());
         return mav;
+    }
+
+    @PostMapping("/dashboard/delete-user")
+    public String deleteUser(@RequestParam int id,
+                             HttpSession session) {
+
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
+        dashboardService.deleteUser(id);
+
+        return "redirect:/dashboard";
     }
 }

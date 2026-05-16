@@ -68,4 +68,8 @@ public class DashboardService {
 
         return duplicatesOnly;
     }
+
+    public void deleteUser(int id) {
+        userRepo.deleteUser(id);
+    }
 }
