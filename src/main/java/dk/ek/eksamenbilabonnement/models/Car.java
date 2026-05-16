@@ -45,11 +45,9 @@ public class Car {
         this.purchasePrice = purchasePrice;
     }
 
-    // Empty constructor (optional, useful for forms)
     public Car() {}
 
     // Getters & Setters
-
     public int getId() {
         return id;
     }
