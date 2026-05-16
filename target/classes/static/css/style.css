@@ -8,6 +8,7 @@
 *::after {
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
 }
@@ -185,6 +186,7 @@ body {
 .sidebar:hover ~ .content {
     margin-left: 220px;
 }
+
 .page {
     margin-left: 70px; /* same as collapsed sidebar width */
     transition: margin-left 0.3s ease;
@@ -216,7 +218,7 @@ body {
     padding: 40px;
     color: white;
     box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .auth-card h2 {
@@ -233,7 +235,7 @@ body {
     border-radius: 10px;
     border: none;
     outline: none;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
     font-size: 14px;
     transition: 0.2s;
@@ -245,13 +247,13 @@ body {
 
 /* Placeholder color */
 .auth-card input::placeholder {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 /* Focus effect */
 .auth-card input:focus,
 .auth-card select:focus {
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
 }
 
@@ -278,7 +280,7 @@ body {
     text-align: center;
     margin-top: 15px;
     font-size: 14px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .auth-footer a {
@@ -314,7 +316,7 @@ body {
     color: white;
     text-align: center;
     box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .home-card h1 {
@@ -323,7 +325,7 @@ body {
 }
 
 .home-card p {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 30px;
 }
 
@@ -398,8 +400,8 @@ body {
     padding: 25px;
     margin-bottom: 30px;
     backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== TABLE ===== */
@@ -413,17 +415,17 @@ body {
 .styled-table th {
     text-align: left;
     padding: 12px;
-    color: rgba(0,0,0,0.7);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .styled-table td {
     padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .styled-table tr:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* ===== STATUS BADGE ===== */
@@ -435,12 +437,12 @@ body {
 }
 
 .status-badge.active {
-    background: rgba(34,197,94,0.2);
+    background: rgba(34, 197, 94, 0.2);
     color: #22c55e;
 }
 
 .status-badge.done {
-    background: rgba(168,85,247,0.2);
+    background: rgba(168, 85, 247, 0.2);
     color: #a855f7;
 }
 
@@ -473,7 +475,7 @@ body {
     padding: 12px;
     border-radius: 12px;
     border: none;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     color: black;
     outline: none;
 }
@@ -500,7 +502,7 @@ body {
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(34,197,94,0.4);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
 }
 
 .edit-btn {
@@ -526,9 +528,9 @@ body {
 .car-grid {
     display: flex;
     flex-direction: row;
-    justify-content: center;/* 👈 side by side */
+    justify-content: center; /* 👈 side by side */
     gap: 40px;
-    flex-wrap: wrap;      /* 👈 allows wrapping to next line */
+    flex-wrap: wrap; /* 👈 allows wrapping to next line */
 }
 
 .car-image {
@@ -545,7 +547,7 @@ body {
     border-radius: 16px;
     overflow: hidden;
 
-    border: 1px solid rgba(0, 0, 0, 0.15);  /* 👈 border */
+    border: 1px solid rgba(0, 0, 0, 0.15); /* 👈 border */
 
     backdrop-filter: blur(10px);
     transition: 0.2s ease;
@@ -555,7 +557,7 @@ body {
 
 .car-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(0, 0, 0, 0.35);  /* 👈 brighter border on hover */
+    border-color: rgba(0, 0, 0, 0.35); /* 👈 brighter border on hover */
 }
 
 .car-card:hover .car-image {
@@ -722,7 +724,7 @@ body {
 }
 
 .how-subtitle {
-    color: rgba(0,0,0,0.7);
+    color: rgba(0, 0, 0, 0.7);
     margin-bottom: 50px;
     font-size: 16px;
 }
@@ -764,8 +766,8 @@ body {
     position: relative;
     overflow: hidden;
 
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 
     backdrop-filter: blur(14px);
 
@@ -775,9 +777,8 @@ body {
 
     transition: all 0.3s ease;
 
-    box-shadow:
-            0 10px 30px rgba(0,0,0,0.18),
-            inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
     cursor: pointer;
 }
@@ -787,12 +788,11 @@ body {
     position: absolute;
     inset: 0;
 
-    background:
-            linear-gradient(
-                    135deg,
-                    rgba(168,85,247,0.15),
-                    rgba(99,102,241,0.05)
-            );
+    background: linear-gradient(
+            135deg,
+            rgba(168, 85, 247, 0.15),
+            rgba(99, 102, 241, 0.05)
+    );
 
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -801,11 +801,10 @@ body {
 .how-card:hover {
     transform: scale(1.06) translateY(-8px);
 
-    border-color: rgba(168,85,247,0.35);
+    border-color: rgba(168, 85, 247, 0.35);
 
-    box-shadow:
-            0 18px 40px rgba(168,85,247,0.18),
-            0 8px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 18px 40px rgba(168, 85, 247, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .how-card:hover::before {
@@ -831,7 +830,7 @@ body {
 
     background: linear-gradient(135deg, #a855f7, #6366f1);
 
-    box-shadow: 0 0 18px rgba(168,85,247,0.45);
+    box-shadow: 0 0 18px rgba(168, 85, 247, 0.45);
 }
 
 .how-card h3 {
@@ -841,7 +840,53 @@ body {
 }
 
 .how-card p {
-    color: rgba(0,0,0,0.72);
+    color: rgba(0, 0, 0, 0.72);
     line-height: 1.6;
     font-size: 15px;
+}
+
+/* ===== ERROR CARD ===== */
+
+.error-card {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 59, 59, 0.12);
+    border: 1px solid rgba(255, 59, 59, 0.35);
+
+    color: #ff4d4f;
+
+    font-weight: 600;
+    text-align: center;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 0 15px rgba(255, 59, 59, 0.15);
+
+    animation: shake 0.35s ease;
+}
+
+/* small shake animation */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-6px);
+    }
+    40% {
+        transform: translateX(6px);
+    }
+    60% {
+        transform: translateX(-4px);
+    }
+    80% {
+        transform: translateX(4px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
