@@ -101,6 +101,10 @@
                     <div th:text="${finishedBookingsCount}"></div>
                 </div>
                 <div>
+                    <strong>Indkomst Fra Lejeaftaler</strong>
+                    <div th:text="${totalContractRevenue} + ' kr'"></div>
+                </div>
+                <div>
                     <strong>Biler der er lejet ud</strong>
                     <div>
                     <span th:each="carId : ${rentedCars}">

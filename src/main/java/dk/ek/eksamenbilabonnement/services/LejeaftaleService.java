@@ -108,4 +108,12 @@ public class LejeaftaleService {
 
         return monthDiff * b.getMonthlyPrice();
     }
+
+    public double getTotalRevenueForFinishedContracts() {
+        double totalRevenue = 0;
+        for (Booking b : bookingRepo.findFinishedBookings()) {
+            totalRevenue += getCalculatedMonthlyPrice(b);
+        }
+        return totalRevenue;
+    }
 }

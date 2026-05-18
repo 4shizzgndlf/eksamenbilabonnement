@@ -61,6 +61,7 @@ public class DashboardController {
         mav.addObject("averagePurchasePrice", bilerService.getAveragePurchasePrice());
         mav.addObject("averageRentedMonthlyPrice", bilerService.getAverageRentedCarMonthlyPrice());
         mav.addObject("totalRentedMonthlyPrice", bilerService.getTotalRentedMonthlyPrice());
+        mav.addObject("totalContractRevenue", lejeaftaleService.getTotalRevenueForFinishedContracts());
         return mav;
     }
 
