@@ -15,10 +15,360 @@
 <div class="page">
     <div class="pageContainer">
         <h1>Biler</h1>
-        <h2>Tilgængelige biler</h2>
-        <h2>Udlejede biler</h2>
-        <h2>Solgte biler</h2>
-        <h2>Ny bil</h2>
+
+        <!-- TILGÆNGELIGE BILER -->
+        <div class="glass-card">
+            <h2>Tilgængelige biler</h2>
+
+            <div class="car-grid">
+
+                <div class="car-card" th:each="car : ${availableCars}">
+
+                    <!-- IMAGE -->
+                    <img th:src="${car.imageUrl}" alt="Bil billede" class="car-image"/>
+
+                    <!-- INFO -->
+                    <div class="car-info">
+                        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+
+                        <p><strong>Id:</strong> <span th:text="${car.id}"></span></p>
+                        <p><strong>Stelnummer:</strong>
+                            <span th:text="${car.vin}"></span>
+                        </p>
+
+                        <p><strong>Nummer:</strong>
+                            <span th:text="${car.vehicleNumber}"></span>
+                        </p>
+
+                        <p class="price"
+                           th:text="${car.subscriptionPrice} + ' kr/md'">
+                        </p>
+
+                        <span class="status-badge active">
+                            TILGÆNGELIG
+                        </span>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+            data-id=${car.id},
+            data-brand=${car.brand},
+            data-model=${car.model},
+            data-vin=${car.vin},
+            data-number=${car.vehicleNumber},
+            data-sub=${car.subscriptionPrice},
+            data-purchase=${car.purchasePrice},
+            data-status=${car.status}
+        "
+                                onclick="fillCarForm(this)">
+                            Rediger
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+            <p th:if="${#lists.isEmpty(availableCars)}">
+                Ingen biler er tilgængelige 🚗
+            </p>
+        </div>
+        <div class="glass-card">
+            <h2>Udlejede biler</h2>
+
+            <div class="car-grid">
+
+                <div class="car-card" th:each="car : ${rentedCars}">
+
+                    <img th:src="${car.imageUrl}" class="car-image"/>
+
+                    <div class="car-info">
+                        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+
+                        <p><strong>Id:</strong> <span th:text="${car.id}"></span></p>
+                        <p><strong>Stelnummer:</strong>
+                            <span th:text="${car.vin}"></span>
+                        </p>
+
+                        <p><strong>Nummer:</strong>
+                            <span th:text="${car.vehicleNumber}"></span>
+                        </p>
+
+                        <p class="price"
+                           th:text="${car.subscriptionPrice} + ' kr/md'">
+                        </p>
+
+                        <span class="status-badge done">
+                            UDLEJET
+                        </span>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+            data-id=${car.id},
+            data-brand=${car.brand},
+            data-model=${car.model},
+            data-vin=${car.vin},
+            data-number=${car.vehicleNumber},
+            data-sub=${car.subscriptionPrice},
+            data-purchase=${car.purchasePrice},
+            data-status=${car.status}
+        "
+                                onclick="fillCarForm(this)">
+                            Rediger
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p th:if="${#lists.isEmpty(rentedCars)}">
+                Ingen biler er udlejet 🚗
+            </p>
+        </div>
+        <div class="glass-card">
+            <h2>Biler til salg</h2>
+
+            <div class="car-grid">
+
+                <div class="car-card" th:each="car : ${carsForSale}">
+
+                    <!-- IMAGE -->
+                    <img th:src="${car.imageUrl}" alt="Bil billede" class="car-image"/>
+
+                    <!-- INFO -->
+                    <div class="car-info">
+                        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+
+                        <p><strong>Id:</strong> <span th:text="${car.id}"></span></p>
+                        <p><strong>Stelnummer:</strong>
+                            <span th:text="${car.vin}"></span>
+                        </p>
+
+                        <p><strong>Nummer:</strong>
+                            <span th:text="${car.vehicleNumber}"></span>
+                        </p>
+
+                        <p class="price"
+                           th:text="${car.purchasePrice} + ' kr'">
+                        </p>
+
+                        <span class="status-badge forSale">
+                            TIL SALG
+                        </span>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+            data-id=${car.id},
+            data-brand=${car.brand},
+            data-model=${car.model},
+            data-vin=${car.vin},
+            data-number=${car.vehicleNumber},
+            data-sub=${car.subscriptionPrice},
+            data-purchase=${car.purchasePrice},
+            data-status=${car.status}
+        "
+                                onclick="fillCarForm(this)">
+                            Rediger
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+            <p th:if="${#lists.isEmpty(carsForSale)}">
+                Ingen biler er til salg endnu 🚗
+            </p>
+        </div>
+        <div class="glass-card">
+            <h2>Solgte biler</h2>
+
+            <div class="car-grid">
+
+                <div class="car-card" th:each="car : ${soldCars}">
+
+                    <!-- IMAGE -->
+                    <img th:src="${car.imageUrl}" alt="Bil billede" class="car-image"/>
+
+                    <!-- INFO -->
+                    <div class="car-info">
+                        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+
+                        <p><strong>Id:</strong> <span th:text="${car.id}"></span></p>
+                        <p><strong>Stelnummer:</strong>
+                            <span th:text="${car.vin}"></span>
+                        </p>
+
+                        <p><strong>Nummer:</strong>
+                            <span th:text="${car.vehicleNumber}"></span>
+                        </p>
+
+                        <p class="price"
+                           th:text="${car.purchasePrice} + ' kr'">
+                        </p>
+
+                        <span class="status-badge solgt">
+                            SOLGT
+                        </span>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+            data-id=${car.id},
+            data-brand=${car.brand},
+            data-model=${car.model},
+            data-vin=${car.vin},
+            data-number=${car.vehicleNumber},
+            data-sub=${car.subscriptionPrice},
+            data-purchase=${car.purchasePrice},
+            data-status=${car.status}
+        "
+                                onclick="fillCarForm(this)">
+                            Rediger
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+            <p th:if="${#lists.isEmpty(soldCars)}">
+                Ingen biler er solgt endnu 🚗
+            </p>
+        </div>
+        <div class="glass-card">
+            <h2>Tilbageleverede biler</h2>
+
+            <div class="car-grid">
+
+                <div class="car-card" th:each="car : ${returnedCars}">
+
+                    <!-- IMAGE -->
+                    <img th:src="${car.imageUrl}" alt="Bil billede" class="car-image"/>
+
+                    <!-- INFO -->
+                    <div class="car-info">
+                        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+
+                        <p><strong>Id:</strong> <span th:text="${car.id}"></span></p>
+                        <p><strong>Stelnummer:</strong>
+                            <span th:text="${car.vin}"></span>
+                        </p>
+
+                        <p><strong>Nummer:</strong>
+                            <span th:text="${car.vehicleNumber}"></span>
+                        </p>
+
+                        <p class="price"
+                           th:text="${car.subscriptionPrice} + ' kr/md'">
+                        </p>
+
+                        <span class="status-badge returned">
+                            AFLEVERET
+                        </span>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+            data-id=${car.id},
+            data-brand=${car.brand},
+            data-model=${car.model},
+            data-vin=${car.vin},
+            data-number=${car.vehicleNumber},
+            data-sub=${car.subscriptionPrice},
+            data-purchase=${car.purchasePrice},
+            data-status=${car.status}
+        "
+                                onclick="fillCarForm(this)">
+                            Rediger
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+            <p th:if="${#lists.isEmpty(returnedCars)}">
+                Ingen biler er tilbageleveret endnu 🚗
+            </p>
+        </div>
+        <!-- REDIGER BIL -->
+        <div class="glass-card">
+            <h2>Rediger biler</h2>
+
+            <form method="post" action="/biler/rediger" class="card-form">
+
+                <!-- hidden ID -->
+                <input type="hidden" name="id" id="edit-car-id">
+
+                <input type="text" name="brand" id="edit-brand" placeholder="Mærke" required>
+                <input type="text" name="model" id="edit-model" placeholder="Model" required>
+
+                <input type="text" name="vin" id="edit-vin" placeholder="Stelnummer" required>
+                <input type="text" name="vehicleNumber" id="edit-vehicleNumber" placeholder="Nummerplade">
+
+                <input type="number" step="0.01" name="subscriptionPrice" id="edit-subscriptionPrice"
+                       placeholder="Abonnement pris" required>
+                <input type="number" step="0.01" name="purchasePrice" id="edit-purchasePrice" placeholder="Salgspris">
+
+                <select name="status" id="edit-status">
+                    <option value="TILGÆNGELIG">TILGÆNGELIG</option>
+                    <option value="UDLEJET">UDLEJET</option>
+                    <option value="SKADET">SKADET</option>
+                    <option value="KLAR_TIL_SALG">TIL SALG</option>
+                    <option value="SOLGT">SOLGT</option>
+                    <option value="AFLEVERET">AFLEVERET</option>
+                </select>
+
+                <button type="submit" class="primary-btn">
+                    Opdater bil
+                </button>
+            </form>
+        </div>
+        <div class="glass-card">
+            <h2>Ny bil</h2>
+
+            <form method="post" action="/biler/opret" class="card-form">
+
+                <input type="text" name="imageUrl" placeholder="Billede URL" required>
+
+                <input type="text" name="vehicleNumber" placeholder="Vognnummer" required>
+
+                <input type="text" name="vin" placeholder="Stelnummer" required>
+
+                <input type="text" name="brand" placeholder="Mærke" required>
+
+                <input type="text" name="model" placeholder="Model" required>
+
+                <input type="number" name="equipmentLevel" placeholder="Udstyrsniveau" required>
+
+                <input type="number" step="0.01" name="steelPrice" placeholder="Stålpris" required>
+
+                <input type="number" step="0.01" name="registrationFee" placeholder="Registreringsafgift" required>
+
+                <input type="number" name="co2Emissions" placeholder="CO2 udledning" required>
+
+                <input type="number" step="0.01" name="subscriptionPrice" placeholder="Abonnement pris" required>
+
+                <input type="number" step="0.01" name="purchasePrice" placeholder="Salgspris" required>
+
+                <select name="status" required>
+                    <option value="TILGÆNGELIG">TILGÆNGELIG</option>
+                    <option value="UDLEJET">UDLEJET</option>
+                    <option value="KLAR_TIL_SALG">KLAR TIL SALG</option>
+                    <option value="SOLGT">SOLGT</option>
+                    <option value="AFLEVERET">AFLEVERET</option>
+                    <option value="SKADET">SKADET</option>
+                    <option value="AFLEVERET">AFLEVERET</option>
+                </select>
+
+                <button type="submit" class="primary-btn">
+                    Opret bil
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

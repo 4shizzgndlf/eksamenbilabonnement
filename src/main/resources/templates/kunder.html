@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kunder</title>
+
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <script th:src="@{js/script.js}" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<div th:replace="fragments/sidebar :: sidebar"></div>
+
+<div class="page">
+    <div class="pageContainer">
+
+        <h1 class="page-title">Kunder</h1>
+
+        <!-- ========================= -->
+        <!-- CUSTOMER LIST -->
+        <!-- ========================= -->
+        <div class="glass-card">
+            <h2>Alle kunder</h2>
+
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fornavn</th>
+                    <th>Efternavn</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                    <th>Adresse</th>
+                    <th>By</th>
+                    <th>Postnr</th>
+                    <th>Kørekort</th>
+                    <th>CPR</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.id}"></td>
+                    <td th:text="${customer.firstName}"></td>
+                    <td th:text="${customer.lastName}"></td>
+                    <td th:text="${customer.email}"></td>
+                    <td th:text="${customer.phoneNumber}"></td>
+                    <td th:text="${customer.address}"></td>
+                    <td th:text="${customer.city}"></td>
+                    <td th:text="${customer.zipCode}"></td>
+                    <td th:text="${customer.driversLicense}"></td>
+                    <td th:text="${customer.cpr}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ========================= -->
+        <!-- CREATE CUSTOMER -->
+        <!-- ========================= -->
+        <div class="glass-card">
+            <h2>Ny kunde</h2>
+
+            <form method="post" action="/kunder/opret" class="card-form">
+
+                <input type="text" name="firstName" placeholder="Fornavn" required>
+                <input type="text" name="lastName" placeholder="Efternavn" required>
+
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="phoneNumber" placeholder="Telefon" required>
+
+                <input type="text" name="address" placeholder="Adresse" required>
+                <input type="text" name="city" placeholder="By" required>
+
+                <input type="text" name="zipCode" placeholder="Postnummer" required>
+                <input type="text" name="driversLicense" placeholder="Kørekort" required>
+
+                <input type="text" name="cpr" placeholder="CPR" required>
+
+                <button type="submit" class="primary-btn">Opret kunde</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

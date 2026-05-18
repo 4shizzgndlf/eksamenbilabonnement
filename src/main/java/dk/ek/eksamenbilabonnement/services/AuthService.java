@@ -27,4 +27,8 @@ public class AuthService {
     public void register(User user) {
         userRepo.createUser(user);
     }
+
+    public void updateUser(User user) {
+        userRepo.updateUser(user);
+    }
 }

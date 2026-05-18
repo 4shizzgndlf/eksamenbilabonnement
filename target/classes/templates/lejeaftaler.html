@@ -14,9 +14,177 @@
 <div th:replace="fragments/sidebar :: sidebar"></div>
 <div class="page">
     <div class="pageContainer">
-        <h1>Lejeaftaler</h1>
-        <h2>Aktuelle lejeaftaler</h2>
-        <h2>Ny lejeaftale</h2>
+
+        <h1 class="page-title">Lejeaftaler</h1>
+
+        <!-- AKTIVE LEJEAFTALER -->
+        <div class="glass-card">
+            <h2>Aktuelle lejeaftaler</h2>
+
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bil</th>
+                    <th>Bruger</th>
+                    <th>Kunde</th>
+                    <th>Start</th>
+                    <th>Slut</th>
+                    <th>Pris</th>
+                    <th>Status</th>
+                    <th>Rediger</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="booking : ${activeBookings}">
+                    <td th:text="${booking.id}"></td>
+                    <td th:text="${booking.carId}"></td>
+                    <td th:text="${booking.userId}"></td>
+                    <td th:text="${booking.customerName}"></td>
+                    <td th:text="${booking.startDate}"></td>
+                    <td th:text="${booking.endDate}"></td>
+                    <td th:text="${booking.monthlyPrice} + ' kr'"></td>
+                    <td>
+                    <span class="status-badge"
+                          th:text="${booking.status}"
+                          th:classappend="${booking.status == 'AKTIV'} ? ' active' : ' done'">
+                    </span>
+                    </td>
+                    <td>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+                data-id=${booking.id},
+                data-name=${booking.customerName},
+                data-car=${booking.carId},
+                data-user=${booking.userId},
+                data-start=${booking.startDate},
+                data-end=${booking.endDate},
+                data-price=${booking.monthlyPrice},
+                data-status=${booking.status}
+            "
+                                onclick="fillEditFormFromButton(this)">
+                            Rediger
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FÆRDIGE LEJEAFTALER -->
+        <div class="glass-card">
+            <h2>Færdige lejeaftaler</h2>
+
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bil</th>
+                    <th>Bruger</th>
+                    <th>Kunde</th>
+                    <th>Start</th>
+                    <th>Slut</th>
+                    <th>Pris</th>
+                    <th>Status</th>
+                    <th>Rediger</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="booking : ${finishedBookings}">
+                    <td th:text="${booking.id}"></td>
+                    <td th:text="${booking.carId}"></td>
+                    <td th:text="${booking.userId}"></td>
+                    <td th:text="${booking.customerName}"></td>
+                    <td th:text="${booking.startDate}"></td>
+                    <td th:text="${booking.endDate}"></td>
+                    <td th:text="${booking.monthlyPrice} + ' kr'"></td>
+                    <td>
+                    <span class="status-badge"
+                          th:text="${booking.status}"
+                          th:classappend="${booking.status == 'AKTIV'} ? ' active' : ' done'">
+                    </span>
+                    </td>
+                    <td>
+                        <button type="button"
+                                class="edit-btn"
+                                th:attr="
+                data-id=${booking.id},
+                data-name=${booking.customerName},
+                data-car=${booking.carId},
+                data-user=${booking.userId},
+                data-start=${booking.startDate},
+                data-end=${booking.endDate},
+                data-price=${booking.monthlyPrice},
+                data-status=${booking.status}
+            "
+                                onclick="fillEditFormFromButton(this)">
+                            Rediger
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- REDIGER LEJEAFTALE -->
+        <div class="glass-card">
+            <h2>Rediger lejeaftale</h2>
+
+            <form method="post" action="/lejeaftaler/rediger" class="card-form">
+
+                <!-- hidden ID -->
+                <input type="hidden" name="id" id="edit-id">
+
+                <input type="text" name="customerName" id="edit-customerName" placeholder="Kundenavn" required>
+
+                <input type="number" name="carId" id="edit-carId" placeholder="Bil ID" required>
+
+                <input type="number" name="userId" id="edit-userId" placeholder="Bruger ID">
+
+                <input type="date" name="startDate" id="edit-startDate" required>
+                <input type="date" name="endDate" id="edit-endDate">
+
+                <input type="number" step="0.01" name="monthlyPrice" id="edit-monthlyPrice" placeholder="Månedlig pris"
+                       required>
+
+                <select name="status" id="edit-status">
+                    <option value="AKTIV">AKTIV</option>
+                    <option value="FÆRDIG">FÆRDIG</option>
+                </select>
+
+                <button type="submit" class="primary-btn">Opdater lejeaftale</button>
+            </form>
+        </div>
+
+        <!-- NY LEJEAFTALE -->
+        <div class="glass-card">
+            <h2>Ny lejeaftale</h2>
+
+            <form method="post" action="/lejeaftaler/opret" class="card-form">
+
+                <input type="text" name="customerName" placeholder="Kundenavn" required>
+
+                <input type="number" name="carId" placeholder="Bil ID" required>
+
+                <input type="number" name="userId" placeholder="Bruger ID">
+
+                <input type="date" name="startDate" required>
+                <input type="date" name="endDate">
+
+                <input type="number" step="0.01" name="monthlyPrice" placeholder="Månedlig pris" required>
+
+                <select name="status">
+                    <option value="AKTIV">AKTIV</option>
+                    <option value="FÆRDIG">FÆRDIG</option>
+                </select>
+
+                <button type="submit" class="primary-btn">Opret lejeaftale</button>
+            </form>
+        </div>
+
     </div>
 </div>
 </body>
