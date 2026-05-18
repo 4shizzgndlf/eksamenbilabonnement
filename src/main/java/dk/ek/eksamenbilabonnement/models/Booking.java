@@ -1,6 +1,7 @@
 package dk.ek.eksamenbilabonnement.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Booking {
     private int id;

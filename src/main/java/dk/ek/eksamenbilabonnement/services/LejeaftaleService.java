@@ -93,4 +93,19 @@ public class LejeaftaleService {
     public double getAverageRentalDays() {
         return bookingRepo.getAverageRentalDays();
     }
+
+    public double getCalculatedMonthlyPrice(Booking b) {
+        int startYear = b.getStartDate().getYear();
+        int startMonth = b.getStartDate().getMonth();
+        int endYear = b.getEndDate().getYear();
+        int endMonth = b.getEndDate().getMonth();
+
+        int monthDiff = (endYear-startYear) * 12 + (endMonth-startMonth);
+
+        if (monthDiff==0) {
+            monthDiff += 1;
+        }
+
+        return monthDiff * b.getMonthlyPrice();
+    }
 }

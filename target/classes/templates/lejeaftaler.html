@@ -30,7 +30,7 @@
                     <th>Kunde</th>
                     <th>Start</th>
                     <th>Slut</th>
-                    <th>Pris</th>
+                    <th>Pris/Måned</th>
                     <th>Status</th>
                     <th>Rediger</th>
                 </tr>
@@ -86,7 +86,8 @@
                     <th>Kunde</th>
                     <th>Start</th>
                     <th>Slut</th>
-                    <th>Pris</th>
+                    <th>Pris/Måned</th>
+                    <th>Slut Pris</th>
                     <th>Status</th>
                     <th>Rediger</th>
                 </tr>
@@ -101,6 +102,7 @@
                     <td th:text="${booking.startDate}"></td>
                     <td th:text="${booking.endDate}"></td>
                     <td th:text="${booking.monthlyPrice} + ' kr'"></td>
+                    <td th:text="${lejeaftaleService.getCalculatedMonthlyPrice(booking)} + ' kr'"></td>
                     <td>
                     <span class="status-badge"
                           th:text="${booking.status}"

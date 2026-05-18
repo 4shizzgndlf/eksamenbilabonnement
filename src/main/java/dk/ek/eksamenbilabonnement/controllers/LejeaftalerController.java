@@ -30,6 +30,7 @@ public class LejeaftalerController {
 
         mav.addObject("activeBookings", lejeaftaleService.getActiveBookings());
         mav.addObject("finishedBookings", lejeaftaleService.getFinishedBookings());
+        mav.addObject("lejeaftaleService", lejeaftaleService);
 
         return mav;
     }
